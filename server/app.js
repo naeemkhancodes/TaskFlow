@@ -6,6 +6,9 @@ const connectDataBase = require("./config/database_connection");
 // Import Routes
 const AdminRoutes = require("./routes/admin_routes");
 const EmployeeRoutes = require("./routes/employee_routes");
+const dns = require("node:dns");
+
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 // 🔐 Load environment variables
 dotenv.config();

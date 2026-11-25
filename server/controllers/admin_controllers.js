@@ -118,6 +118,7 @@ const CreateEmployee = async (req, res) => {
 
     // 🔥 4. GENERATE + HASH PASSWORD
     const rawPassword = generatePassword(8);
+    // console.log("Generated Password:", rawPassword); // For debugging, remove in production
     const hashedPassword = await bcrypt.hash(rawPassword, 10);
 
     // ✅ 5. CREATE USER
@@ -139,14 +140,14 @@ const CreateEmployee = async (req, res) => {
 
     // 📧 6. SEND EMAIL (NON-BLOCKING)
     // ✅ Send email (clean)
-    sendEmail({
-      name,
-      email,
-      password: rawPassword,
-      department,
-      designation,
-      adminName: createdBy.name,
-    }).catch((err) => console.error(err));
+    // sendEmail({
+    //   name,
+    //   email,
+    //   password: rawPassword,
+    //   department,
+    //   designation,
+    //   adminName: createdBy.name,
+    // }).catch((err) => console.error(err));
 
     // ✅ 7. RESPONSE
     res.status(201).json({
@@ -159,6 +160,7 @@ const CreateEmployee = async (req, res) => {
         department: newUser.department,
         designation: newUser.designation,
         role: newUser.role,
+        password: rawPassword, // Send raw password in response for admin to share with employee
       },
     });
   } catch (error) {

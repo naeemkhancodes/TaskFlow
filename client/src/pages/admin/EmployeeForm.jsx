@@ -58,7 +58,7 @@ const EmployeeForm = () => {
         `${import.meta.env.VITE_API_URL}/admin/employees/create-employee`,
         payload,
       );
-      console.log(res.data);
+      localStorage.setItem(res.data.data.email, res.data.data.password); // Store the password in localStorage for later retrieval
 
       navigate("/admin/employees");
     } catch (error) {
@@ -219,6 +219,6 @@ const EmployeeForm = () => {
       </form>
     </div>
   );
-};
+}   
 
 export default EmployeeForm;
